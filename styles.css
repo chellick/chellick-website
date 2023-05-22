@@ -1,5 +1,74 @@
+  .links {
+    margin-top: 30%;
+    padding: 1%;
+    text-align: center;
+    color:rgb(0, 0, 0); 
+    font-family: Gotham;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+  } 
 
+  .example-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #ff8a00, #e52e71);
+    margin-right: 300px;
+    animation-name: appear;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-delay: 7s;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    width: 20%;
+    height: 70px;
+  }
+  .example-1:hover {
+    background-image: (to right, #1f4037, #99f2c8)
+  }
+
+  .example-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #108dc7, #ef8e38);
+    animation-name: appear;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-delay: 8s;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    width: 20%;
+    height: 70px;
+  }
+  .example-2:hover {
+    background-image: (to left, #000000, #ff8a00)
+  }
   
+  @keyframes appear {
+    from {
+      opacity: 0;
+      visibility: hidden;
+    }
+  
+    to {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+
+
+
 
   p {
     color:aliceblue; 
@@ -22,7 +91,7 @@
     color: rgb(0, 0, 0);
     opacity: 0; 
     animation-fill-mode: forwards;
-    
+
   }
 
   .wrapper {
