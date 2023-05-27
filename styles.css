@@ -1,8 +1,11 @@
+  
+  /* MAIN */
+  
   .links {
     margin-top: 30%;
     padding: 1%;
     text-align: center;
-    color:rgb(0, 0, 0); 
+    color:rgb(255, 255, 255); 
     font-family: Gotham;
     font-size: 30px;
     display: flex;
@@ -13,7 +16,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(to right, #ff8a00, #e52e71);
     margin-right: 300px;
     animation-name: appear;
     animation-duration: 3s;
@@ -27,16 +29,14 @@
     text-decoration: none;
     width: 20%;
     height: 70px;
-  }
-  .example-1:hover {
-    background-image: (to right, #1f4037, #99f2c8)
+    transition: background-image 0.3s ease;
+    border: 1px;
   }
 
   .example-2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(to right, #108dc7, #ef8e38);
     animation-name: appear;
     animation-duration: 3s;
     animation-iteration-count: 1;
@@ -49,10 +49,10 @@
     text-decoration: none;
     width: 20%;
     height: 70px;
+    transition: background-image 0.3s ease;
+    border: 1px;
   }
-  .example-2:hover {
-    background-image: (to left, #000000, #ff8a00)
-  }
+ 
   
   @keyframes appear {
     from {
@@ -74,6 +74,7 @@
     color:aliceblue; 
     font-family: Gotham;
     text-align: center;
+    text-decoration: none;
   }
 
   
@@ -155,4 +156,57 @@
     bottom: 0;
     left: 50%; /* Центрирование по горизонтали */
     transform: translateX(-50%); /* Центрирование по горизонтали */
+  }
+
+
+
+  /* ARTICLES */
+
+  .Article {
+    font-family: Gotham;
+    font-size: 40px;
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 10%;
+    animation-name: appear;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+  }
+
+
+
+  .description {
+    font-family: Source Code Pro;
+    font-size: 15px;
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0%;
+    margin-left: 1%;
+  }
+
+  #approx {
+    font-family: Source Code Pro;
+    font-size: 15px;
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0%;
+    margin-left: 8%;
+  }
+
+  #other {
+    margin-left: -8%;
+  }
+
+  #other_d {
+    font-family: Source Code Pro;
+    font-size: 15px;
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0%;
+    margin-left: -12%;
+  }
+  a {
+    text-decoration: none;
+    
   }
