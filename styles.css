@@ -1,59 +1,72 @@
   
   /* MAIN */
-  
-  .links {
-    margin-top: 30%;
-    padding: 1%;
+  /* main tags */
+
+  h1 {
+    color:aliceblue; 
+    font-family: Montserrat;
+    text-decoration: none;
+    text-align: left;
+  }
+
+  #animated-heading {
+    font-family: Gotham; font-style: Bold; 
+    animation: myAnim 1s ease-in 5s 1 normal forwards;
+    font-size: 60px;
     text-align: center;
-    color:rgb(255, 255, 255); 
-    font-family: Gotham;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-  } 
+    margin-top: 10%;
+    color: whitesmoke
 
-  .example-1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 300px;
-    animation-name: appear;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    animation-delay: 7s;
-    white-space: nowrap;
-    overflow: hidden;
-    opacity: 0;
-    animation-fill-mode: forwards;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    width: 20%;
-    height: 70px;
-    transition: background-image 0.3s ease;
-    border: 1px;
   }
 
-  .example-2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation-name: appear;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    animation-delay: 8s;
-    white-space: nowrap;
-    overflow: hidden;
-    opacity: 0;
-    animation-fill-mode: forwards;
-    color: rgb(0, 0, 0);
+  a {
     text-decoration: none;
-    width: 20%;
-    height: 70px;
-    transition: background-image 0.3s ease;
-    border: 1px;
+    color:rgb(198, 171, 37); 
   }
- 
+
+  p {
+    color:aliceblue; 
+    font-family: Montserrat;
+    /* text-align: center; */
+    text-decoration: none;
+  }
+
+  body {
+    text-align: center;
+    overflow:  auto;
+    background-color: #1a1c1d;
+  }
+
+    img {
+    padding: 50px;
+  }
+
+  /* MAIN anims */
+
+  @keyframes myAnim {
+    0% {
+      opacity: 1;
+    }
   
+    100% {
+      opacity: 0;
+    }
+  }  
+
+  @keyframes typing {
+    from {
+      width: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    to {
+      width: 40ch;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   @keyframes appear {
     from {
       opacity: 0;
@@ -67,19 +80,9 @@
   }
 
 
+  /* div classes */
 
-
-
-  p {
-    color:aliceblue; 
-    font-family: Gotham;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  
   .typing-demo {
-    width: 39ch;
     animation-name: typing;
     animation-duration: 3s;
     animation-iteration-count: 1;
@@ -87,68 +90,24 @@
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid;
-    font-family: Gotham;
-    font-size: 40px;
-    color: rgb(0, 0, 0);
     opacity: 0; 
     animation-fill-mode: forwards;
-
+    box-sizing: border-box;
+    font-family: Gotham;
+    font-size: 40px;
+    color: whitesmoke;
+    
   }
 
   .wrapper {
     display: flex;
     justify-content: center;
-    margin: -20%;
+    margin-top: -10%;
+
   }
   
-  
-  @keyframes typing {
-    from {
-      width: 0;
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    to {
-      width: 40ch;
-      opacity: 1;
-      visibility: visible;
-    }
-
-  }
-
-
-  img {
-    padding: 50px;
-  }
-
   #ava {
     vertical-align: middle;
-  }
-
-  body {
-    text-align: center;
-    overflow:  auto;
-  }
-  
-  
-  h1 {
-    font-family: Gotham; font-style: Bold; 
-    animation: myAnim 1s ease-in 5s 1 normal forwards;
-    font-size: 60px;
-    text-align: center;
-    margin-top: 10%;
-
-  }
-
-  @keyframes myAnim {
-    0% {
-      opacity: 1;
-    }
-  
-    100% {
-      opacity: 0;
-    }
   }
 
   .urls {
@@ -158,55 +117,73 @@
     transform: translateX(-50%); /* Центрирование по горизонтали */
   }
 
-
-
-  /* ARTICLES */
-
-  .Article {
-    font-family: Gotham;
-    font-size: 40px;
-    color:rgb(0, 0, 0);
-    text-decoration: none;
-    margin: 10%;
+  .example {
+    position: absolute;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     animation-name: appear;
     animation-duration: 3s;
     animation-iteration-count: 1;
-    animation-delay: 1s;
-  }
-
-
-
-  .description {
-    font-family: Source Code Pro;
-    font-size: 15px;
-    color:rgb(0, 0, 0);
+    animation-delay: 7s;
+    animation-fill-mode: forwards;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background-image 0.3s ease;
+    opacity: 0;
+    color: rgb(17, 163, 141);
     text-decoration: none;
-    margin: 0%;
-    margin-left: 1%;
+    box-sizing: border-box;
+    border: 1px solid rgb(17, 163, 141);
   }
 
-  #approx {
-    font-family: Source Code Pro;
-    font-size: 15px;
-    color:rgb(0, 0, 0);
-    text-decoration: none;
-    margin: 0%;
-    margin-left: 8%;
+  #first_example {
+    left: 30%;
   }
 
-  #other {
-    margin-left: -8%;
+  #second_example {
+    right: 30%
   }
 
-  #other_d {
-    font-family: Source Code Pro;
-    font-size: 15px;
-    color:rgb(0, 0, 0);
-    text-decoration: none;
-    margin: 0%;
-    margin-left: -12%;
+    .links { 
+    display: flex;
+    justify-content: center;
+  
+    color:whitesmoke; 
+    font-family: Gotham;
+    font-size: 30px;
+    margin-top: 10%;
   }
-  a {
-    text-decoration: none;
-    
+
+
+
+/* ARTICLES */
+
+  .Page {
+    margin: 5%;
+  }
+
+  .Articles {
+    margin-top: 10%;
+    margin-left: 5%;
+  }
+
+  .date {
+    color:whitesmoke; 
+    font-family: Montserrat;
+    font-size: small;
+    text-align: left;
+  }
+  .pre-info {
+    color:whitesmoke; 
+    font-family: Montserrat;
+    font-size: small;
+    text-align: left;
+    font-style: Bold;
+    max-width: 500px;
+  }
+  
+  #main-heading {
+    text-align: center;
   }
