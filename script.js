@@ -1,9 +1,4 @@
-TESTER = document.getElementById('tester');
-
-Plotly.plot( TESTER, [{
-    x: [1, 2, 3, 4, 5],
-    y: [1, 2, 4, 8, 16] }], { 
-    margin: { t: 0 } }, {showSendToCloud:true} );
-
-/* Current Plotly.js version */
-console.log( Plotly.BUILD );
+var x = 10;
+var y = 20;
+console.log("The sum of", x, "and", y, "is", x + y); // Prints "The sum of 10 and 20 is 30" to the console
+console.log(`The sum of ${x} and ${y} is ${x + y}`); // Using template literals

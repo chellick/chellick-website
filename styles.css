@@ -9,6 +9,8 @@
     text-align: left;
   }
 
+  
+
   #animated-heading {
     font-family: Gotham; font-style: Bold; 
     animation: myAnim 1s ease-in 5s 1 normal forwards;
@@ -182,8 +184,17 @@
     text-align: left;
     font-style: Bold;
     max-width: 500px;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
   
   #main-heading {
     text-align: center;
+  }
+
+  iframe {
+    position: absolute;
+    max-width: 700px;
+    max-height: 1000px;
+    
   }
