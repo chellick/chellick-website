@@ -1,20 +1,10 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-
-// Lazy loading hook for images
-const useImageLoader = () => {
-  const [loadedImages, setLoadedImages] = useState(new Set());
-  
-  const handleImageLoad = useCallback((src) => {
-    setLoadedImages(prev => new Set(prev).add(src));
-  }, []);
-  
-  return { loadedImages, handleImageLoad };
-};
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 // Optimized Image component with lazy loading
-const OptimizedImage = ({ src, alt, className, onLoad }) => {
+const OptimizedImage = ({ src, alt, className }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const imgRef = React.useRef();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,33 +17,36 @@ const OptimizedImage = ({ src, alt, className, onLoad }) => {
       { threshold: 0.1 }
     );
     
-    const imgElement = document.querySelector(`img[alt="${alt}"]`);
-    if (imgElement) observer.observe(imgElement);
+    if (imgRef.current) observer.observe(imgRef.current);
     
     return () => observer.disconnect();
-  }, [alt]);
+  }, []);
   
   const handleLoad = () => {
     setIsLoaded(true);
-    onLoad?.(src);
+  };
+  
+  const handleError = () => {
+    setIsLoaded(true); // Still show placeholder
   };
   
   return (
     <img
+      ref={imgRef}
       src={isInView ? src : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRjNGNEY2Ii8+Cjwvc3ZnPgo='}
       alt={alt}
-      className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+      className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-50'}`}
       onLoad={handleLoad}
+      onError={handleError}
       loading="lazy"
     />
   );
 };
 
-export default function App() {
+function App() {
   const [activeSection, setActiveSection] = useState('work');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { loadedImages, handleImageLoad } = useImageLoader();
 
   // Optimized scroll handler with throttling
   useEffect(() => {
@@ -118,13 +111,11 @@ export default function App() {
     }
   ], []);
 
-  // Optimized tech stack with better CDN URLs
+  // Optimized tech stack with stable CDN URLs
   const techStack = useMemo(() => [
     { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
     { name: "PyTorch", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" },
     { name: "TensorFlow", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg" },
-    { name: "scikit-learn", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" },
-    { name: "Apache Spark", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original.svg" },
     { name: "NumPy", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
     { name: "Pandas", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
     { name: "FastAPI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
@@ -133,24 +124,32 @@ export default function App() {
     { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
     { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
     { name: "Linux", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
-    { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" },
-    { name: "Prometheus", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg" },
-    { name: "Grafana", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" }
+    { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" }
   ], []);
+
+  const handleSectionChange = useCallback((section) => {
+    setActiveSection(section);
+    setIsMenuOpen(false);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-inter">
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <a href="#" className="text-xl font-bold tracking-tight font-inter">CHELLICK</a>
+          <button 
+            onClick={() => handleSectionChange('work')}
+            className="text-xl font-bold tracking-tight font-inter hover:opacity-80 transition-opacity"
+          >
+            CHELLICK
+          </button>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {['work', 'education', 'projects', 'tech', 'contact'].map((section) => (
               <button
                 key={section}
-                onClick={() => setActiveSection(section)}
+                onClick={() => handleSectionChange(section)}
                 className={`${
                   activeSection === section
                     ? 'text-black border-b-2 border-black'
@@ -164,7 +163,7 @@ export default function App() {
 
           {/* Mobile menu button */}
           <button 
-            className="md:hidden text-gray-500 focus:outline-none transition-all duration-200"
+            className="md:hidden text-gray-500 focus:outline-none transition-all duration-200 hover:text-black"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -185,12 +184,12 @@ export default function App() {
               {['work', 'education', 'projects', 'tech', 'contact'].map((section) => (
                 <button
                   key={section}
-                  onClick={() => {setActiveSection(section); setIsMenuOpen(false);}}
+                  onClick={() => handleSectionChange(section)}
                   className={`${
                     activeSection === section
                       ? 'text-black font-medium'
                       : 'text-gray-500'
-                  } transition-all duration-200 font-inter uppercase text-sm`}
+                  } transition-all duration-200 font-inter uppercase text-sm text-left`}
                 >
                   {section === 'tech' ? 'Tech Stack' : section}
                 </button>
@@ -260,7 +259,7 @@ export default function App() {
         <section className="py-20 bg-gray-50/50">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-3xl font-bold mb-12 font-inter">Проекты</h2>
-            <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-1">
+            <div className="space-y-8">
               {projects.map(project => (
                 <article key={project.id} className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100">
                   <div className="p-6">
@@ -281,7 +280,7 @@ export default function App() {
         <section className="py-20">
           <div className="container mx-auto px-4 max-w-6xl">
             <h2 className="text-3xl font-bold mb-12 font-inter">Технологии</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
               {techStack.map((tool, index) => (
                 <div 
                   key={index} 
@@ -289,9 +288,8 @@ export default function App() {
                 >
                   <OptimizedImage 
                     src={tool.logo} 
-                    alt={tool.name} 
+                    alt={`${tool.name} logo`} 
                     className="w-12 h-12 mb-3 object-contain"
-                    onLoad={handleImageLoad}
                   />
                   <span className="text-sm font-medium font-inter text-center">{tool.name}</span>
                 </div>
@@ -310,12 +308,13 @@ export default function App() {
               Interested in collaborating on MLOps projects or need help deploying AI solutions? Let's connect and make it happen.
             </p>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 font-inter">Name</label>
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
                   placeholder="Your name"
                   required
@@ -327,6 +326,7 @@ export default function App() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter"
                   placeholder="your@email.com"
                   required
@@ -337,6 +337,7 @@ export default function App() {
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2 font-inter">Message</label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 font-inter resize-vertical"
                   placeholder="Tell me about your MLOps needs..."
@@ -362,8 +363,8 @@ export default function App() {
             <p className="text-gray-600 font-inter text-sm">© 2025 Chellick. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="mailto:contact@chellick.dev" className="text-gray-600 hover:text-black transition-colors font-inter text-sm">Email</a>
-              <a href="https://github.com/chellick" className="text-gray-600 hover:text-black transition-colors font-inter text-sm">GitHub</a>
-              <a href="https://linkedin.com/in/chellick" className="text-gray-600 hover:text-black transition-colors font-inter text-sm">LinkedIn</a>
+              <a href="https://github.com/chellick" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black transition-colors font-inter text-sm">GitHub</a>
+              <a href="https://linkedin.com/in/chellick" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black transition-colors font-inter text-sm">LinkedIn</a>
             </div>
           </div>
         </div>
@@ -372,6 +373,4 @@ export default function App() {
   );
 }
 
-// Render the app
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default App;

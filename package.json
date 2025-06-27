@@ -1,5 +1,5 @@
 {
-  "name": "chellick-website",
+  "name": "chellick",
   "version": "1.0.0",
   "private": true,
   "homepage": "https://chellick.github.io/chellick-website",
@@ -28,5 +28,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "MLOPS engineer"
 }
