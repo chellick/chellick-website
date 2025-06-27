@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/chellick-website/static/js/main.8427e271.js",
+    "main.js": "/chellick-website/static/js/main.40a717ff.js",
     "index.html": "/chellick-website/index.html",
-    "main.8427e271.js.map": "/chellick-website/static/js/main.8427e271.js.map"
+    "main.40a717ff.js.map": "/chellick-website/static/js/main.40a717ff.js.map"
   },
   "entrypoints": [
-    "static/js/main.8427e271.js"
+    "static/js/main.40a717ff.js"
   ]
 }
