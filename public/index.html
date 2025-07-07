@@ -6,28 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Chellick - MLOps Engineer specializing in scalable AI solutions and machine learning pipelines" />
-    <meta name="keywords" content="MLOps, Machine Learning, AI, Python, PyTorch, Docker" />
+    <meta name="keywords" content="MLOps, Machine Learning, AI, Python, PyTorch, Docker, Kafka, Airflow, Ansible, Transformers, MLflow" />
     <meta name="author" content="Chellick" />
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chellick.github.io/chellick-website/" />
     <meta property="og:title" content="Chellick: MLOps Engineer" />
     <meta property="og:description" content="Specializing in building robust machine learning pipelines and deploying scalable AI systems" />
-    
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="Chellick: MLOps Engineer" />
     <meta property="twitter:description" content="Specializing in building robust machine learning pipelines and deploying scalable AI systems" />
-    
     <title>Chellick - MLOps Engineer</title>
-    
-    <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -40,19 +31,11 @@
         }
       }
     </script>
-    
-    <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="//upload.wikimedia.org" />
-    
     <style>
-      /* Critical CSS for above-the-fold content */
       .font-inter { font-family: 'Inter', sans-serif; }
-      
-      /* Smooth scrolling */
       html { scroll-behavior: smooth; }
-      
-      /* Font smoothing */
       body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -61,13 +44,10 @@
           'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
           sans-serif;
       }
-      
       code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
           monospace;
       }
-      
-      /* Loading spinner */
       .loading {
         display: flex;
         justify-content: center;
@@ -75,7 +55,6 @@
         height: 100vh;
         background: white;
       }
-      
       .spinner {
         border: 4px solid #f3f3f3;
         border-top: 4px solid #3498db;
@@ -84,14 +63,35 @@
         height: 40px;
         animation: spin 1s linear infinite;
       }
-      
       @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
-      
-      /* Hide loading when React loads */
       #root:not(:empty) + .loading,
+      #root:not(:empty) .loading {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <div class="loading" id="fallback-loading">
+      <div class="spinner"></div>
+    </div>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const root = document.getElementById('root');
+          const loading = document.getElementById('fallback-loading');
+          if (root && root.children.length > 0 && loading) {
+            loading.style.display = 'none';
+          }
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
       #root:not(:empty) .loading {
         display: none;
       }
